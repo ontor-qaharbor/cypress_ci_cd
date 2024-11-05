@@ -28,5 +28,3 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           build: npm install
-          start: npm start          # Comment or remove this if not needed
-          wait-on: http://localhost:3000  # Adjust if you need to wait for a specific URL
