@@ -1,34 +1,26 @@
 name: Cypress Tests
-
-on:
+'on':
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
-
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-
       - name: Install dependencies
         run: npm install
-
-      - name: Install Cypress binary
-        run: npx cypress install
-
-      - name: Fix Cypress permissions
-        run: sudo chmod +x ./node_modules/.bin/cypress
-
       - name: Run Cypress tests
-        run: npx cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          build: npm install
+          start: npm start
+          wait-on: 'http://localhost:3000'
